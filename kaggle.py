@@ -5,10 +5,11 @@ class Kaggle(object):
     KAGGLE_LOGIN = "https://www.kaggle.com/account/login"
     SESSION = requests.Session()
 
-    def __init__(self, data_url):
+    def __init__(self, data_url, settings):
         self.data_url = data_url
+        self._login()
 
-    def login(self, settings):
+    def _login(self):
         print("Login to Kaggle")
         return self.SESSION.post(self.KAGGLE_LOGIN, data = settings['auth'])
     
