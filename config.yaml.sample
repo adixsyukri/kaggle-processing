@@ -1,3 +1,7 @@
 auth:
   username: username
   password: pasword
+
+aws:
+  access: access-key
+  secret: secret-key
