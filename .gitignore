@@ -1,3 +1,4 @@
 config.yaml
 *.pyc
 venv
+.ipynb_checkpoints
