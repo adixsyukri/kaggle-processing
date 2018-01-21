@@ -1,4 +1,5 @@
 import requests
+import csv
 
 class Kaggle(object):
 
@@ -6,16 +7,18 @@ class Kaggle(object):
     SESSION = requests.Session()
     INDEX = 0
 
-    def __init__(self, data_url, settings):
-        self.data_url = data_url
+    def __init__(self, settings):
         self._login(settings)
 
     def _login(self, settings):
         print("Login to Kaggle")
         return self.SESSION.post(self.KAGGLE_LOGIN, data = settings['auth'])
     
-    def get_data(self):
+    def get_data(self, data_url):
         print("Getting dataset")
-        response = self.SESSION.get(self.data_url)
+        return self.SESSION.get(data_url)
+
+    def to_array(self, record, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL):
         print("Transform data from text to array")
-        return [row.split(',') for row in response.content.split('\r\n')]
+        reader = csv.reader(record, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
+        return [x for x in reader]
