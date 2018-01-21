@@ -4,17 +4,18 @@ class Kaggle(object):
 
     KAGGLE_LOGIN = "https://www.kaggle.com/account/login"
     SESSION = requests.Session()
+    INDEX = 0
 
     def __init__(self, data_url, settings):
         self.data_url = data_url
-        self._login()
+        self._login(settings)
 
-    def _login(self):
+    def _login(self, settings):
         print("Login to Kaggle")
         return self.SESSION.post(self.KAGGLE_LOGIN, data = settings['auth'])
     
     def get_data(self):
-        print("Getting datast")
+        print("Getting dataset")
         response = self.SESSION.get(self.data_url)
         print("Transform data from text to array")
         return [row.split(',') for row in response.content.split('\r\n')]
